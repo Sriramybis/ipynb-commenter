@@ -108,6 +108,8 @@ A new `.ipynb` file (e.g., `output_commented.ipynb`) will be created with commen
 - Topic grouping and section headers
 - Custom prompt templates
 - GUI inclusion
+- Output recognition and inference generation
+- Context oriented follow up recommendations
 
 ---
 
