@@ -8,7 +8,7 @@ import requests
 import os
 
 def read_notebook(path: str) -> NotebookNode:
-    print(f"📘 Reading notebook from {path}...")
+    print(f"Reading notebook from {path}...")
     with open(path, 'r', encoding='utf-8') as f:
         return read(f, as_version=4)
 
@@ -47,7 +47,7 @@ Code:
         return generate_markdown("Code Block", f"Step {index + 1}", f"LLM request failed: {str(e)}")
 
 def annotate_notebook(nb: NotebookNode) -> NotebookNode:
-    print("✏️  Annotating notebook with markdown comments...")
+    print("Annotating notebook with markdown comments...")
     new_cells = []
     for i, cell in enumerate(nb.cells):
         if cell.cell_type == "code":
@@ -56,21 +56,21 @@ def annotate_notebook(nb: NotebookNode) -> NotebookNode:
             new_cells.append(cell)
         else:
             new_cells.append(cell)
-    print("✅ Annotation complete.")
+    print("Annotation complete.")
     nb.cells = new_cells
     return nb
 
 def save_notebook(nb: NotebookNode, output_path: str):
-    print(f"💾 Saving annotated notebook to {output_path}...")
+    print(f"Saving annotated notebook to {output_path}...")
     with open(output_path, 'w', encoding='utf-8') as f:
         write(nb, f)
-    print("✅ Notebook saved successfully.")
+    print("Notebook saved successfully.")
 
 def process_notebook(input_path: str, output_path: str):
     nb = read_notebook(input_path)
     annotated_nb = annotate_notebook(nb)
     save_notebook(annotated_nb, output_path)
-    print("🚀 Opening the output notebook...")
+    print("Opening the output notebook...")
     os.system(f"jupyter notebook {output_path}")
 
 # Example usage:
