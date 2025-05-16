@@ -82,7 +82,7 @@ process_notebook("input.ipynb", "output_commented.ipynb")
 ### 3. Or run from terminal (if enabled as CLI):
 
 ```bash
-python main.py
+python auto_comment.py
 ```
 
 ---
