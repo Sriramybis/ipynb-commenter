@@ -1,124 +1,132 @@
-# Ipynb Auto Commenter
+# 📘 Ipynb Auto Commenter
 
-Automatically annotate Jupyter Notebooks (`.ipynb`) by inserting intelligently generated markdown comments before each code cell. This tool uses [Ollama](https://ollama.com/) to call a local LLM (like `llama3`) and produce readable, structured documentation in the format:
-
-```markdown
-# Title
-
-## Sub title
-
-Explanation
-```
+Automatically annotate Jupyter Notebooks (`.ipynb`) by inserting intelligently generated markdown comments before each code cell. This project now includes a **FastAPI-based web interface** with file upload support and auto-download functionality.
 
 ---
 
-## Features
+## 🚀 Features
 
-- Reads `.ipynb` notebooks and analyzes code cells
-- Uses a local LLM (via Ollama) to infer purpose of each code block
-- Adds a markdown explanation before each code block
-- Saves and opens the modified notebook automatically
+- Parses `.ipynb` notebooks
+- Sends each code block to a local LLM (via [Ollama](https://ollama.com/))
+- Generates markdown comments in the format:
 
----
+  ```markdown
+  # Title
 
-## Example Output Format
+  ## Subtitle
 
-Each code cell will be preceded by a markdown cell like:
+  Explanation
+  ```
 
-```markdown
-# Data Loading
-
-## Reading data using pandas
-
-This code loads the dataset from a CSV file using pandas.
-```
-
-```python
-df = pd.read_csv("my_data.csv")
-```
+- Prepends comments above each code cell
+- Exposes this functionality through a user-friendly web interface
+- Auto-deletes temporary files after serving response
 
 ---
 
-## Setup
+## 🧠 What It Looks Like
 
-### 1. Clone the repo
+You upload a Jupyter Notebook → It returns a downloadable `.ipynb` file with comments added above each cell.
+
+---
+
+## 🔧 Setup Instructions
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/ipynb-auto-commenter.git
 cd ipynb-auto-commenter
 ```
 
-### 2. Set up virtual environment
+### 2. Set up a virtual environment
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Install and run Ollama
+### 4. Install and run Ollama
 
-Install [Ollama](https://ollama.com/) and run a model:
+Install Ollama and run a local model like `llama3`:
 
 ```bash
 ollama run llama3
 ```
 
-Make sure Ollama is accessible at `http://localhost:11434`.
+Make sure Ollama is running on `http://localhost:11434`.
 
 ---
 
-## Usage
+## 🚀 Run the FastAPI App
 
-### 1. Add a Jupyter Notebook (e.g., `input.ipynb`) to the project root.
-
-### 2. Modify `main.py` or use directly:
-
-```python
-from main import process_notebook
-process_notebook("input.ipynb", "output_commented.ipynb")
-```
-
-### 3. Or run from terminal (if enabled as CLI):
+From the root directory:
 
 ```bash
-python main.py
+uvicorn app.main:app --reload
+```
+
+Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+## 🖥️ Web Interface
+
+- Upload any `.ipynb` file
+- The backend processes the notebook and returns a modified notebook
+- The file is automatically downloaded and temporary files are deleted
+
+---
+
+## 📦 Directory Structure
+
+```
+.
+├── auto_comment.py          # Core logic for commenting notebooks
+├── app/
+│   ├── main.py              # FastAPI app
+│   ├── templates/
+│   │   └── index.html       # Upload form
+│   └── static/
+│       └── style.css        # Basic styling
+├── requirements.txt
+├── README.md
 ```
 
 ---
 
-## Output
+## 🧠 Learning Highlights
 
-A new `.ipynb` file (e.g., `output_commented.ipynb`) will be created with comments auto-inserted and opened in your Jupyter environment.
+This project demonstrates:
+
+- File upload/download in FastAPI
+- Using `BackgroundTasks` for cleanup
+- HTML/CSS frontend with Jinja2 templates
+- Integration with local LLM via Ollama
+- Dynamic notebook manipulation with `nbformat`
 
 ---
 
-## Requirements
+## 📋 Requirements
 
 - Python 3.8+
-- `nbformat`
-- `requests`
-- Ollama with a local LLM (e.g., llama3)
+- `fastapi`, `uvicorn`, `jinja2`, `nbformat`, `requests`, `python-multipart`
+- Ollama (local LLM runner)
 
 ---
 
-## Future Work
+## 📄 License
 
-- Support for cloud-hosted LLMs
-- Topic grouping and section headers
-- Custom prompt templates
-- GUI inclusion
-- Output recognition and inference generation
-- Context oriented follow up recommendations
+MIT License. Free to use, modify, and extend.
 
 ---
 
-## License
+## 🙌 Acknowledgements
 
-MIT License. Free to use and modify.
-
----
-
-## Acknowledgements
-
-Built with using Python, Jupyter, and Ollama.
+Built with ❤️ using Python, FastAPI, and Ollama.
