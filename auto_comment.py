@@ -74,4 +74,8 @@ def process_notebook(input_path: str, output_path: str):
     os.system(f"jupyter notebook {output_path}")
 
 # Example usage:
-process_notebook("input.ipynb", "output_commented.ipynb")
+# Example usage:
+# Run this file directly to test processing manually
+if __name__ == "__main__":
+    process_notebook("input.ipynb", "output_commented.ipynb")
+

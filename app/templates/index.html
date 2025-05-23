@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notebook Auto-Commenter</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Upload Your Jupyter Notebook</h1>
+      <form action="/upload/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".ipynb" required />
+        <button type="submit">Process Notebook</button>
+      </form>
+    </div>
+  </body>
+</html>
